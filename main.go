@@ -1,7 +1,10 @@
 package main
 
-import "study/feature1"
+import (
+	"study/feature_postgres/simple_connection"
+)
 
 func main() {
-	feature1.Feature1()
+
+	simple_connection.CheckConnection()
 }
