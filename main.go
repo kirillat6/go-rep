@@ -1,51 +1,15 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"study/feature_postgres/simple_connection"
-	"study/feature_postgres/simple_sql"
-	"time"
+	"study/http_server"
 )
 
 func main() {
-	ctx := context.Background()
-	conn, err := simple_connection.CreateConnection(ctx)
-
+	fmt.Println("Сервер начал работу!")
+	err := http_server.StartHttpServer()
 	if err != nil {
-		panic(err)
-	}
-
-	if err := simple_sql.CreateTable(ctx, conn); err !=nil {
-		panic(err)
-	} 	
-	if err := simple_sql.InsertRow(
-		ctx,
-		conn,
-		"Обед", 
-		"Покушац надо", 
-		false,
-		time.Now(),
-		); err !=nil {
-		panic(err)
+		fmt.Println("Во время работы сервера произошла ошибка:",err)
 	} 
-
-	// if err := simple_sql.UpdateRow(
-	// ctx,
-	// conn,
-	// 2,
-	// ); err !=nil {
-	// 	panic(err)
-	// } 
-	
-	// if err := simple_sql.DeleteRow(ctx, conn, 2); err != nil {
-	// 	panic(err)
-	// }
-
-	// tasks, err := simple_sql.SelectRows(ctx, conn) 
-	// if err != nil {
-	// 	panic(err)
-	// }
-
-	fmt.Println("SUCCEED!")
+	fmt.Println("Сервер остановил свою работу!")
 }
